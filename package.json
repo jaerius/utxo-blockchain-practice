@@ -1,0 +1,31 @@
+{
+  "name": "utxo-blockchain-practice",
+  "version": "1.0.0",
+  "description": "This is an Ethereum Basic Module!",
+  "main": "index.html",
+  "scripts": {
+    "test": "mocha",
+    "test:1": "mocha test/mission1.test.js",
+    "test:2": "mocha test/mission2.test.js",
+    "test:3": "mocha test/mission3.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codesandbox-app/static-template.git"
+  },
+  "keywords": [],
+  "author": "Ethereum Traveler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codesandbox-app/static-template/issues"
+  },
+  "homepage": "https://github.com/codesandbox-app/static-template#readme",
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.24.7"
+  }
+}
