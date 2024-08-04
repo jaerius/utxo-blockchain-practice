@@ -4,32 +4,34 @@ class Transaction {
   }
   execute() {
     const isDoubleSpend = this.transactions.inputUTXOs.findIndex(
-      (utxo) => utxo.spent === true,
+      (utxo) => utxo.spent === true
     );
 
     if (isDoubleSpend !== -1) {
       throw new Error("input TXO is already spent.");
     }
 
-    /**
-     * 📚 Mission 2.
-     * 트랜잭션이 성공한다면, 이중 지출되지 않게 입력 UTXO가 사용되었다고 처리해줍니다.
-     */
+    const prevInputUTXOs = [...this.transactions.inputUTXOs];
+    const prevOutputUTXOs = [...this.transactions.outputUTXOs];
 
-    const totalInputAmount = this.transactions.inputUTXOs.reduce(
+    const totalInputAmount = prevInputUTXOs.reduce(
       (acc, cur) => acc + cur.amount,
-      0,
+      0
     );
-    const totalOutputAmount = this.transactions.outputUTXOs.reduce(
+    const totalOutputAmount = prevOutputUTXOs.reduce(
       (acc, cur) => acc + cur.amount,
-      0,
+      0
     );
 
     if (totalInputAmount < totalOutputAmount) {
       throw new Error(
-        "insufficient amount: total value of the inputs is less than the total value of the outputs!",
+        "insufficient amount: total value of the inputs is less than the total value of the outputs!"
       );
     }
+
+    const newInputUTXOs = prevInputUTXOs.map((utxo) => (utxo.spent = true));
+
+    this.transactions.inputUTXOs = newInputUTXOs;
   }
 }
 

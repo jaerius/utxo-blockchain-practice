@@ -1,7 +1,7 @@
 const { assert } = require("chai");
 
-const Transaction = require("../src/mission1/Transaction");
-const TXO = require("../src/mission1/TXO");
+const Transaction = require("../src/mission1/transaction");
+const TXO = require("../src/mission2/TXO");
 
 describe("Mission 1: 금액과 잔고", function () {
   const fromAddress = "1DBS97W3jWw6FnAqdduK1NW6kFo3Aid1N6";
