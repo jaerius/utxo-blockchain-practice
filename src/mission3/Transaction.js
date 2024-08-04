@@ -1,10 +1,11 @@
 class Transaction {
   constructor(inputUTXOs, outputUTXOs) {
     this.transactions = { inputUTXOs, outputUTXOs };
+    this.fee = 0;
   }
   execute() {
     const isDoubleSpend = this.transactions.inputUTXOs.findIndex(
-      (utxo) => utxo.spent === true,
+      (utxo) => utxo.spent === true
     );
 
     if (isDoubleSpend !== -1) {
@@ -16,16 +17,16 @@ class Transaction {
 
     const totalInputAmount = prevInputUTXOs.reduce(
       (acc, cur) => acc + cur.amount,
-      0,
+      0
     );
     const totalOutputAmount = prevOutputUTXOs.reduce(
       (acc, cur) => acc + cur.amount,
-      0,
+      0
     );
 
     if (totalInputAmount < totalOutputAmount) {
       throw new Error(
-        "insufficient amount: total value of the inputs is less than the total value of the outputs!",
+        "insufficient amount: total value of the inputs is less than the total value of the outputs!"
       );
     }
 
@@ -38,6 +39,11 @@ class Transaction {
      * 보상자의 수수료를 구합니다.
      * 수수료는 모든 입력값의 합계에서 모든 출력값의 합계를 뺀 값입니다.
      */
+    if (totalInputAmount - totalOutputAmount > 0) {
+      this.fee = totalInputAmount - totalOutputAmount;
+    } else {
+      this.fee = 0;
+    }
   }
 }
 
